@@ -78,6 +78,7 @@ async def city_image(cityName:str):
     return city
 #傳出圖片
 from fastapi.responses import FileResponse
+import os
 @app.get("/cities/image/{cityName}")
 async def city_image(cityName:str):
     conn = sqlite3.connect('citys.db')
@@ -87,5 +88,5 @@ async def city_image(cityName:str):
     row = cursor.fetchone()
     imageName:str = row[4]
     cursor.close()
-    conn.close()
-    return FileResponse(f"./images/{imageName}")
+    conn.close()    
+    return FileResponse(f'./images/{imageName}')
